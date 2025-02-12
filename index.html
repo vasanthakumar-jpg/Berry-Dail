@@ -61,34 +61,34 @@
 
     <!-- Sidebar (Desktop) -->
     <aside class="hidden sm:flex flex-col w-56 bg-white h-screen shadow-md fixed left-0 top-0">
-        <div class="p-4 text-xl font-semibold border-b">BerryDial</div>
+        <div class="p-4 text-xl font-semibold border-b sm:text-2xl">BerryDial</div>
         <ul class="mt-4 space-y-3 px-4 flex-1">
-            <li class="flex items-center space-x-2 text-gray-700 py-2"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></li>
-            <li class="flex items-center space-x-2 text-gray-700 py-2"><i class="fas fa-cogs"></i> <span>Agent Customization</span></li>
-            <li class="flex items-center space-x-2 text-gray-700 py-2"><i class="fas fa-phone"></i> <span>Call Logs</span></li>
-            <li class="flex items-center space-x-2 text-gray-700 py-2"><i class="fas fa-user"></i> <span>Account Settings</span></li>
+            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></li>
+            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base"><i class="fas fa-cogs"></i> <span>Agent Customization</span></li>
+            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base"><i class="fas fa-phone"></i> <span>Call Logs</span></li>
+            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base"><i class="fas fa-user"></i> <span>Account Settings</span></li>
         </ul>
         <div class="px-4 border-t pt-4 py-4">
             <ul class="space-y-3">
-                <li class="flex items-center space-x-2 text-gray-700 py-2"><i class="fas fa-question-circle"></i> <span>Update & FAQ</span></li>
-                <li class="flex items-center space-x-2 text-gray-700 py-2"><i class="fas fa-sign-out-alt"></i> <span>Log Out</span></li>
+                <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base"><i class="fas fa-question-circle"></i> <span>Update & FAQ</span></li>
+                <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base"><i class="fas fa-sign-out-alt"></i> <span>Log Out</span></li>
             </ul>
         </div>
     </aside>
 
     <!-- Mobile Sidebar -->
     <aside id="mobileSidebar" class="sm:hidden fixed left-0 top-0 bg-white w-64 h-full shadow-md transform -translate-x-full transition-transform flex flex-col">
-        <div class="p-4 text-xl font-semibold border-b">BerryDial</div>
+        <div class="p-4 text-xl font-semibold border-b sm:text-2xl">BerryDial</div>
         <ul class="mt-4 space-y-3 px-4 flex-1">
-            <li class="flex items-center space-x-2 text-gray-700 py-2"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></li>
-            <li class="flex items-center space-x-2 text-gray-700 py-2"><i class="fas fa-cogs"></i> <span>Agent Customization</span></li>
-            <li class="flex items-center space-x-2 text-gray-700 py-2"><i class="fas fa-phone"></i> <span>Call Logs</span></li>
-            <li class="flex items-center space-x-2 text-gray-700 py-2"><i class="fas fa-user"></i> <span>Account Settings</span></li>
+            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></li>
+            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base"><i class="fas fa-cogs"></i> <span>Agent Customization</span></li>
+            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base"><i class="fas fa-phone"></i> <span>Call Logs</span></li>
+            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base"><i class="fas fa-user"></i> <span>Account Settings</span></li>
         </ul>
-        <div class="px-4 border-t pt-4 py-4">
+        <div class="px-4 border-t pt-4 py-0">
             <ul class="space-y-3">
-                <li class="flex items-center space-x-2 text-gray-700 py-2"><i class="fas fa-question-circle"></i> <span>Update & FAQ</span></li>
-                <li class="flex items-center space-x-2 text-gray-700 py-2"><i class="fas fa-sign-out-alt"></i> <span>Log Out</span></li>
+                <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base"><i class="fas fa-question-circle"></i> <span>Update & FAQ</span></li>
+                <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base"><i class="fas fa-sign-out-alt"></i> <span>Log Out</span></li>
             </ul>
         </div>
     </aside>
@@ -101,34 +101,34 @@
             <div class="p-4 flex justify-between items-center max-w-screen-xl mx-auto">
                 <button id="sidebarButton" class="sm:hidden text-gray-600" onclick="toggleSidebar()">
                     <!-- Hamburger Icon -->
-                    <span id="hamburgerIcon" class="text-2xl">
+                    <span id="hamburgerIcon" class="text-2xl sm:text-3xl">
                         <i class="fas fa-bars"></i>
                     </span>
                     <!-- Close Icon -->
-                    <span id="closeIcon" class="text-2xl hidden">
+                    <span id="closeIcon" class="text-2xl hidden sm:text-3xl">
                         <i class="fas fa-times"></i>
                     </span>
                 </button>
                 <div class="text-xl font-semibold text-gray-800 sm:hidden">BerryDial</div>
                 <div class="hidden sm:flex space-x-10">
-                    <p class="text-gray-600 hover:text-gray-800 cursor-pointer">Dashboard</p>
-                    <p class="text-gray-600 hover:text-gray-800 cursor-pointer">Default</p>
+                    <p class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm sm:text-base">Dashboard</p>
+                    <p class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm sm:text-base">Default</p>
                 </div>
                 
                 <div class="flex items-center space-x-4">
                     <div class="relative mt-1">
-                        <i class="fas fa-bell text-xl text-gray-600 "></i>
+                        <i class="fas fa-bell text-xl text-gray-600 sm:text-2xl"></i>
                         <span class="absolute -top-1 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex justify-center items-center">1</span>
                     </div>
                     <div class="relative flex items-center space-x-2 cursor-pointer" id="userIcon" onclick="toggleDropdown()">
-                        <i class="fas fa-user text-xl text-gray-600"></i>
-                        <span class="hidden sm:inline text-gray-600">My Account</span>
-                        <i class="fas fa-chevron-down text-gray-600" id="chevronIcon"></i>
+                        <i class="fas fa-user text-xl text-gray-600 sm:text-2xl"></i>
+                        <span class="hidden sm:inline text-gray-600 text-sm sm:text-base">My Account</span>
+                        <i class="fas fa-chevron-down text-gray-600 sm:text-xl" id="chevronIcon"></i>
                         <div id="dropdownMenu" class="hidden absolute right-0 mt-48 w-32 bg-white shadow-lg rounded-md text-gray-600">
                             <ul>
-                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Profile</li>
-                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Settings</li>
-                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Log Out</li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Profile</li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Settings</li>
+                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Log Out</li>
                             </ul>
                         </div>
                     </div>
@@ -139,38 +139,21 @@
         <!-- Scrollable Content -->
         <div class="flex-1 overflow-y-auto p-6">
             <div class="flex justify-center items-center h-full">
-                <div class="text-center bg-white p-6 rounded-lg shadow-lg">
-                    <button class="bg-gray-900 text-white w-[185px] h-[37px] rounded-md">
+                <div class="text-center p-6">
+                    <button class="bg-gray-900 text-white w-[185px] h-[37px] rounded-md text-sm sm:text-base">
                         + Create New Agent
                     </button>                
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                    <p class="text-gray-600 mt-4">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
+                    <p class="text-gray-600 mt-4 text-sm sm:text-base">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
                 </div>
             </div>
         </div>
 
         <!-- Footer -->
         <footer class="bg-white shadow-md border-t border-gray-200">
-            <div class="md:px-5 py-5 flex flex-col lg:flex-row justify-center md:justify-between items-center lg:items-center max-w-screen-xl mx-auto">
+            <div class="md:px-5 py-3 sm:py-5 flex flex-col lg:flex-row justify-center md:justify-between items-center lg:items-center max-w-screen-xl mx-auto">
                 <div class="flex flex-col lg:flex-row lg:gap-6">
                     <div>
-                        <p class="text-xl font-semibold text-gray-800 text-center lg:text-start">BerryDial</p>
+                        <p class="text-xl font-semibold text-gray-800 text-center lg:text-start text-sm sm:text-lg">BerryDial</p>
                     </div>
                     <div class="flex gap-2 my-1 sm:my-2 justify-center items-center">
                         <p class="text-sm text-[#838383]">Terms of use</p>
