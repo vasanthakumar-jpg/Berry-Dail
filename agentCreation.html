@@ -51,17 +51,17 @@
       </button>
       
       <!-- Make "BerryDial" a clickable link -->
-      <a href="/index.html" class="text-xl font-semibold cursor-pointer md:w-48">
+      <a href="index.html" class="text-xl font-semibold cursor-pointer md:w-48">
         BerryDial
       </a>
       
       <div class="hidden md:flex items-center space-x-4 text-gray-600 px-4">
-        <span class="text-gray-500 cursor-pointer">Dashboard</span>
+        <a href="dashboard.html" class="text-gray-500 cursor-pointer">Dashboard</a>
         <span class="text-gray-400">/</span>
-        <span class="font-medium cursor-pointer">Default</span>
+        <a href="agentCreation.html" class="font-medium cursor-pointer">Agent Creation</a>
       </div>
     </div>
-
+  
     <!-- Right side (bell icon and user dropdown) -->
     <div class="flex items-center space-x-4">
       <!-- Bell Icon with notification badge -->
@@ -69,7 +69,7 @@
         <i class="fas fa-bell text-xl text-gray-600 sm:text-2xl"></i>
         <span class="absolute -top-1 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex justify-center items-center">1</span>
       </div>
-
+  
       <!-- User Icon with dropdown menu -->
       <div class="relative flex items-center space-x-2 cursor-pointer" id="userIcon" onclick="toggleDropdown()">
         <i class="fas fa-user text-xl text-gray-600 sm:text-2xl"></i>
