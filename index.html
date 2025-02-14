@@ -1,174 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <script>
-        // Toggle sidebar on mobile
-        function toggleSidebar() {
-            document.getElementById("mobileSidebar").classList.toggle("-translate-x-full");
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Berry Dial</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const hamburger = document.getElementById('hamburger');
+      
+      sidebar.classList.toggle('-translate-x-full'); // Slide out or in
+      overlay.classList.toggle('hidden'); // Show the overlay when sidebar is open
+      
+      // Toggle the hamburger/close icon
+      hamburger.classList.toggle('fa-bars');
+      hamburger.classList.toggle('fa-times');
+    }
 
-            // Toggle hamburger and close icons
-            const hamburgerIcon = document.getElementById("hamburgerIcon");
-            const closeIcon = document.getElementById("closeIcon");
-            hamburgerIcon.classList.toggle("hidden");
-            closeIcon.classList.toggle("hidden");
-        }
+    // Toggle dropdown menu for user profile
+    function toggleDropdown() {
+      const dropdownMenu = document.getElementById("dropdownMenu");
+      const chevronIcon = document.getElementById("chevronIcon");
+      dropdownMenu.classList.toggle("hidden");
+      chevronIcon.classList.toggle("fa-chevron-down");
+      chevronIcon.classList.toggle("fa-chevron-up");
+    }
 
-        // Close sidebar when clicking outside on mobile
-        window.addEventListener('click', function (event) {
-            const mobileSidebar = document.getElementById("mobileSidebar");
-            const sidebarButton = document.getElementById("sidebarButton");
-
-            // If the sidebar is open and the click is outside the sidebar or button, close it
-            if (!mobileSidebar.contains(event.target) && !sidebarButton.contains(event.target) && !mobileSidebar.classList.contains("-translate-x-full")) {
-                mobileSidebar.classList.add("-translate-x-full");
-
-                // Hide the close icon and show the hamburger icon
-                document.getElementById("hamburgerIcon").classList.remove("hidden");
-                document.getElementById("closeIcon").classList.add("hidden");
-            }
-
-            // Close dropdown when clicking outside
-            const dropdownMenu = document.getElementById("dropdownMenu");
-            const userIcon = document.getElementById("userIcon");
-
-            // If click is outside the dropdown or user icon, close the dropdown
-            if (!userIcon.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                dropdownMenu.classList.add("hidden");
-                const chevronIcon = document.getElementById("chevronIcon");
-                chevronIcon.classList.remove("fa-chevron-up");
-                chevronIcon.classList.add("fa-chevron-down");
-            }
-        });
-
-        // Toggle dropdown menu for user profile
-        function toggleDropdown() {
-            const dropdownMenu = document.getElementById("dropdownMenu");
-            const chevronIcon = document.getElementById("chevronIcon");
-            dropdownMenu.classList.toggle("hidden");
-            chevronIcon.classList.toggle("fa-chevron-down");
-            chevronIcon.classList.toggle("fa-chevron-up");
-        }
-    </script>
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function (event) {
+      const dropdownMenu = document.getElementById('dropdownMenu');
+      const userIcon = document.getElementById('userIcon');
+      
+      // Check if the click is outside the dropdown and user icon
+      if (!userIcon.contains(event.target)) {
+        // Close the dropdown if it is open
+        dropdownMenu.classList.add('hidden');
+        const chevronIcon = document.getElementById("chevronIcon");
+        chevronIcon.classList.remove("fa-chevron-up");
+        chevronIcon.classList.add("fa-chevron-down");
+      }
+    });
+  </script>
 </head>
+<body class="flex flex-col min-h-screen">
+  <!-- Overlay for mobile -->
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" onclick="toggleSidebar()"></div>
 
-<body class="bg-gray-100 flex">
-
-    <!-- Sidebar (Desktop) -->
-    <aside class="hidden sm:flex flex-col w-56 bg-white h-screen shadow-md fixed left-0 top-0">
-        <div class="p-4 text-xl font-semibold border-b sm:text-2xl cursor-pointer">BerryDial</div>
-        <ul class="mt-4 space-y-3 px-4 flex-1">
-            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base cursor-pointer hover:bg-gray-100 rounded-lg pl-2"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></li>
-            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base cursor-pointer hover:bg-gray-100 rounded-lg pl-2"><i class="fas fa-cogs"></i> <span>Agent Customization</span></li>
-            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base cursor-pointer hover:bg-gray-100 rounded-lg pl-2"><i class="fas fa-phone"></i> <span>Call Logs</span></li>
-            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base cursor-pointer hover:bg-gray-100 rounded-lg pl-2"><i class="fas fa-user"></i> <span>Account Settings</span></li>
-        </ul>
-        <div class="px-4 border-t pt-4 py-4">
-            <ul class="space-y-3">
-                <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base cursor-pointer hover:bg-gray-100 rounded-lg pl-2"><i class="fas fa-question-circle"></i> <span>Update & FAQ</span></li>
-                <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base cursor-pointer hover:bg-gray-100 rounded-lg pl-2"><i class="fas fa-sign-out-alt"></i> <span>Log Out</span></li>
-            </ul>
-        </div>
-    </aside>
-
-    <!-- Mobile Sidebar -->
-    <aside id="mobileSidebar" class="sm:hidden fixed left-0 top-0 bg-white w-64 h-full shadow-md transform -translate-x-full transition-transform flex flex-col">
-        <div class="p-4 text-xl font-semibold border-b sm:text-2xl cursor-pointer">BerryDial</div>
-        <ul class="mt-4 space-y-3 px-4 flex-1">
-            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base cursor-pointer hover:bg-gray-100 rounded-lg pl-2"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></li>
-            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base cursor-pointer hover:bg-gray-100 rounded-lg pl-2"><i class="fas fa-cogs"></i> <span>Agent Customization</span></li>
-            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base cursor-pointer hover:bg-gray-100 rounded-lg pl-2"><i class="fas fa-phone"></i> <span>Call Logs</span></li>
-            <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base cursor-pointer hover:bg-gray-100 rounded-lg pl-2"><i class="fas fa-user"></i> <span>Account Settings</span></li>
-        </ul>
-        <div class="px-4 border-t pt-4 py-0">
-            <ul class="space-y-3">
-                <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base cursor-pointer hover:bg-gray-100 rounded-lg pl-2"><i class="fas fa-question-circle"></i> <span>Update & FAQ</span></li>
-                <li class="flex items-center space-x-2 text-gray-700 py-2 text-sm sm:text-base cursor-pointer hover:bg-gray-100 rounded-lg pl-2"><i class="fas fa-sign-out-alt"></i> <span>Log Out</span></li>
-            </ul>
-        </div>
-    </aside>
-
-    <!-- Main Content -->
-    <div class="flex-1 sm:ml-56 flex flex-col h-screen">
-        
-        <!-- Header -->
-        <nav class="bg-white shadow-md sticky top-0 left-0 w-full z-10 border-b border-gray-200">
-            <div class="p-3.5 flex justify-between items-center max-w-screen-xl mx-auto">
-                <button id="sidebarButton" class="sm:hidden text-gray-600" onclick="toggleSidebar()">
-                    <!-- Hamburger Icon -->
-                    <span id="hamburgerIcon" class="text-2xl sm:text-3xl">
-                        <i class="fas fa-bars"></i>
-                    </span>
-                    <!-- Close Icon -->
-                    <span id="closeIcon" class="text-2xl hidden sm:text-3xl">
-                        <i class="fas fa-times"></i>
-                    </span>
-                </button>
-                <div class="text-xl font-semibold text-gray-800 sm:hidden cursor-pointer">BerryDial</div>
-                <div class="hidden sm:flex space-x-10">
-                    <p class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm sm:text-base">Dashboard</p>
-                    <p class="text-gray-600 hover:text-gray-800 cursor-pointer text-sm sm:text-base">Default</p>
-                </div>
-                
-                <div class="flex items-center space-x-4">
-                    <div class="relative mt-1 cursor-pointer">
-                        <i class="fas fa-bell text-xl text-gray-600 sm:text-2xl "></i>
-                        <span class="absolute -top-1 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex justify-center items-center">1</span>
-                    </div>
-                    <div class="relative flex items-center space-x-2 cursor-pointer" id="userIcon" onclick="toggleDropdown()">
-                        <i class="fas fa-user text-xl text-gray-600 sm:text-2xl"></i>
-                        <span class="hidden sm:inline text-gray-600 text-sm sm:text-base">My Account</span>
-                        <i class="fas fa-chevron-down text-gray-600 sm:text-xl" id="chevronIcon"></i>
-                        <div id="dropdownMenu" class="hidden absolute right-0 mt-48 w-32 bg-white shadow-lg rounded-md text-gray-600">
-                            <ul>
-                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Profile</li>
-                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Settings</li>
-                                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Log Out</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Scrollable Content -->
-        <div class="flex-1 overflow-y-auto p-6">
-            <div class="flex justify-center items-center h-full">
-                <div class="text-center p-6">
-                    <button class="bg-gray-900 text-white w-[185px] h-[37px] rounded-md text-sm sm:text-base transition duration-300 ease-in-out border-2 hover:bg-white hover:text-black hover:border-black">
-                        + Create New Agent
-                    </button>     
-           
-                    <p class="text-gray-600 mt-4 text-sm sm:text-base">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <footer class="bg-white shadow-md border-t border-gray-200">
-            <div class="md:px-5 py-3 sm:py-5 flex flex-col lg:flex-row justify-center md:justify-between items-center lg:items-center max-w-screen-xl mx-auto">
-                <div class="flex flex-col lg:flex-row lg:gap-6">
-                    <div>
-                        <p class="text-xl font-semibold text-gray-800 text-center lg:text-start text-sm sm:text-lg cursor-pointer">BerryDial</p>
-                    </div>
-                    <div class="flex gap-2 my-1 sm:my-2 justify-center items-center">
-                        <p class="text-sm text-[#838383] cursor-pointer hover:text-black">Terms of use</p>
-                        <p class="text-sm text-[#838383] cursor-pointer hover:text-black">Privacy Policy</p>
-                        <p class="text-sm text-[#838383] cursor-pointer hover:text-black">Cookies</p>
-                    </div>
-                </div>
-                <div>
-                    <p class="text-sm text-[#323232]">@2025 BerryDial | All rights reserved</p>
-                </div>
-            </div>
-        </footer>
+  <!-- Header -->
+  <header class="w-full bg-white p-4 md:p-6 flex justify-between items-center border-b border-gray-200 z-50 fixed top-0 left-0 right-0">
+    <div class="flex items-center">
+      <button class="md:hidden" onclick="toggleSidebar()">
+        <i id="hamburger" class="fas fa-bars h-6 w-6 text-gray-600 mt-2"></i>
+      </button>
+      
+      <!-- Make "BerryDial" a clickable link -->
+      <a href="/index.html" class="text-xl font-semibold cursor-pointer md:w-48">
+        BerryDial
+      </a>
+      
+      <div class="hidden md:flex items-center space-x-4 text-gray-600 px-4">
+        <span class="text-gray-500 cursor-pointer">Dashboard</span>
+        <span class="text-gray-400">/</span>
+        <span class="font-medium cursor-pointer">Default</span>
+      </div>
     </div>
 
-</body>
+    <!-- Right side (bell icon and user dropdown) -->
+    <div class="flex items-center space-x-4">
+      <!-- Bell Icon with notification badge -->
+      <div class="relative mt-1 cursor-pointer">
+        <i class="fas fa-bell text-xl text-gray-600 sm:text-2xl"></i>
+        <span class="absolute -top-1 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex justify-center items-center">1</span>
+      </div>
 
+      <!-- User Icon with dropdown menu -->
+      <div class="relative flex items-center space-x-2 cursor-pointer" id="userIcon" onclick="toggleDropdown()">
+        <i class="fas fa-user text-xl text-gray-600 sm:text-2xl"></i>
+        <span class="hidden sm:inline text-gray-600 text-sm sm:text-base">My Account</span>
+        <i class="fas fa-chevron-down text-gray-600 sm:text-xl" id="chevronIcon"></i>
+        
+        <!-- Dropdown menu -->
+        <div id="dropdownMenu" class="hidden absolute right-0 mt-48 w-32 bg-white shadow-lg rounded-md text-gray-600">
+            <ul>
+                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Profile</li>
+                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Settings</li>
+                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Log Out</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex flex-1 flex-col md:flex-row mt-16"> <!-- Added margin-top for header space -->
+    <!-- Sidebar -->
+    <aside id="sidebar" class=" w-64 bg-gray-50 border-r border-gray-200 p-4 md:p-2 flex flex-col space-y-4 fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 md:relative transition duration-200 ease-in-out z-40">
+      <div class="mt-16 md:mt-6 flex flex-col gap-2">
+        <a href="dashboard.html" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-tachometer-alt"></i> Dashboards</a>
+        <a href="agentCreation.html" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-cogs"></i> Agent Customization</a>
+        <a href="#" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-phone"></i> Call Logs</a>
+        <a href="#" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-user"></i> Account Settings</a>
+      </div>
+      <div class="fixed bottom-0 w-[93%] flex flex-col gap-2">
+        <a href="#" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-question-circle"></i> Updates & FAQ</a>
+        <a href="#" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-sign-out-alt"></i> Log out</a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 bg-gray-100 p-6 flex flex-col justify-center items-center">
+      <!-- Content goes here -->
+        <div class="text-center p-6">
+            <button class="bg-gray-900 text-white w-[185px] h-[37px] rounded-md text-sm sm:text-base transition duration-300 ease-in-out border-2 border-white hover:bg-white hover:text-black hover:border-black">
+                + Create New Agent
+            </button>     
+            <p class="text-gray-600 mt-4 text-sm sm:text-base">You haven’t created any agents yet. Start by setting up your first AI voice agent to manage conversations effortlessly.</p>
+        </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class=" w-full p-4 md:p-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-gray-600 text-sm md:space-x-6 bg-white shadow-md ">
+    <a href="/index.html" class="hover:underline mr-4 md:ml-6 font-semibold my-2 md:hidden">BerryDial</a>
+    
+    <div class=" flex space-x-4 md:space-x-6">
+      <a href="#" class="hover:underline mr-4 md:ml-6 font-semibold hidden md:block">BerryDial</a>
+      <a href="#" class="hover:underline">Term of use</a>
+      <a href="#" class="hover:underline">Privacy policy</a>
+      <a href="#" class="hover:underline">Cookies</a>
+    </div>
+    <div class="mt-2 md:mt-0 md:ml-auto">
+      &copy; 2025 BerryDial | All rights reserved
+    </div>
+  </footer>
+</body>
 </html>

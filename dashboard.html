@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const hamburger = document.getElementById('hamburger');
+      
+      sidebar.classList.toggle('-translate-x-full'); // Slide out or in
+      overlay.classList.toggle('hidden'); // Show the overlay when sidebar is open
+      hamburger.classList.toggle('fa-bars');
+      hamburger.classList.toggle('fa-times');
+    }
+
+    // Toggle dropdown menu for user profile
+    function toggleDropdown() {
+      const dropdownMenu = document.getElementById("dropdownMenu");
+      const chevronIcon = document.getElementById("chevronIcon");
+      dropdownMenu.classList.toggle("hidden");
+      chevronIcon.classList.toggle("fa-chevron-down");
+      chevronIcon.classList.toggle("fa-chevron-up");
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function (event) {
+      const dropdownMenu = document.getElementById('dropdownMenu');
+      const userIcon = document.getElementById('userIcon');
+      if (!userIcon.contains(event.target)) {
+        dropdownMenu.classList.add('hidden');
+        const chevronIcon = document.getElementById("chevronIcon");
+        chevronIcon.classList.remove("fa-chevron-up");
+        chevronIcon.classList.add("fa-chevron-down");
+      }
+    });
+  </script>
+</head>
+<body class="flex flex-col min-h-screen">
+  <!-- Overlay for mobile -->
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" onclick="toggleSidebar()"></div>
+
+  <!-- Header -->
+  <header class="w-full bg-white p-4 md:p-6 flex justify-between items-center border-b border-gray-200 z-50 fixed top-0 left-0 right-0">
+    <div class="flex items-center">
+      <button class="md:hidden" onclick="toggleSidebar()">
+        <i id="hamburger" class="fas fa-bars h-6 w-6 text-gray-600 mt-2"></i>
+      </button>
+      
+      <!-- Make "BerryDial" a clickable link -->
+      <a href="/index.html" class="text-xl font-semibold cursor-pointer md:w-48">
+        BerryDial
+      </a>
+      
+      <div class="hidden md:flex items-center space-x-4 text-gray-600 px-4">
+        <span class="text-gray-500 cursor-pointer">Dashboard</span>
+        <span class="text-gray-400">/</span>
+        <span class="font-medium cursor-pointer">Default</span>
+      </div>
+    </div>
+
+    <!-- Right side (bell icon and user dropdown) -->
+    <div class="flex items-center space-x-4">
+      <!-- Bell Icon with notification badge -->
+      <div class="relative mt-1 cursor-pointer">
+        <i class="fas fa-bell text-xl text-gray-600 sm:text-2xl"></i>
+        <span class="absolute -top-1 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex justify-center items-center">1</span>
+      </div>
+
+      <!-- User Icon with dropdown menu -->
+      <div class="relative flex items-center space-x-2 cursor-pointer" id="userIcon" onclick="toggleDropdown()">
+        <i class="fas fa-user text-xl text-gray-600 sm:text-2xl"></i>
+        <span class="hidden sm:inline text-gray-600 text-sm sm:text-base">My Account</span>
+        <i class="fas fa-chevron-down text-gray-600 sm:text-xl" id="chevronIcon"></i>
+        
+        <!-- Dropdown menu -->
+        <div id="dropdownMenu" class="hidden absolute right-0 mt-48 w-32 bg-white shadow-lg rounded-md text-gray-600">
+            <ul>
+                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Profile</li>
+                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Settings</li>
+                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Log Out</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex flex-1 flex-col md:flex-row mt-16"> <!-- Added margin-top for header space -->
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 bg-gray-50 border-r border-gray-200 p-4 md:p-2 flex flex-col space-y-4 fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 md:relative transition duration-200 ease-in-out z-40">
+      <div class="mt-16 md:mt-6 flex flex-col gap-2">
+        <a href="dashboard.html" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-tachometer-alt"></i> Dashboards</a>
+        <a href="agentCreation.html" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-cogs"></i> Agent Customization</a>
+        <a href="#" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-phone"></i> Call Logs</a>
+        <a href="#" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-user"></i> Account Settings</a>
+      </div>
+      <div class="fixed bottom-0 flex flex-col gap-2">
+        <a href="#" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-question-circle"></i> Updates & FAQ</a>
+        <a href="#" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-sign-out-alt"></i> Log out</a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 bg-gray-100 p-6 flex flex-col justify-center items-center">
+      <!-- Content goes here -->
+      <div class="shadow-md rounded-md bg-white p-5 my-auto">
+        <div class="border-b-2 border-gray-300 pb-4 mb-6">
+            <h1 class="text-xl sm:text-2xl font-semibold mb-2">Welcome to BerryDial AI</h1>
+            <p class="text-gray-600 text-sm sm:text-base">Create your AI now and unlock smart possibilities</p>
+          </div>
+          <form class="space-y-6" id="agent-form" onsubmit="return validateForm()">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+              <div class="relative">
+                <label class="block text-sm sm:text-base font-medium mb-1">Agent Name</label>
+                <input type="text" id="agent-name" class="w-full border border-gray-300 rounded-md p-2" placeholder="Enter Name">
+                <span id="name-error" class="text-red-500 text-xs hidden">Please enter an agent name</span>
+              </div>
+              <div class="relative">
+                <label class="block text-sm sm:text-base font-medium mb-1">Language</label>
+                <select id="language" class="w-full border border-gray-300 rounded-md p-2">
+                  <option value="">Select your Language</option>
+                  <option value="English">English</option>
+                  <option value="Mandarin">Mandarin</option>
+                  <option value="Spanish">Spanish</option>
+                  <option value="Hindi">Hindi</option>
+                  <option value="Arabic">Arabic</option>
+                </select>
+                <span id="language-error" class="text-red-500 text-xs hidden">Please select a language</span>
+              </div>
+            </div>
+          
+            <div class="relative">
+              <label class="block text-sm sm:text-base font-medium mb-1">Description</label>
+              <input type="text" id="description" class="w-full border border-gray-300 rounded-md p-2" placeholder="Agent Description">
+              <span id="description-error" class="text-red-500 text-xs hidden">Please enter a description</span>
+            </div>
+          
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+              <div class="relative">
+                <label class="block text-sm sm:text-base font-medium mb-1">Characteristics</label>
+                <select id="characteristics" class="w-full border border-gray-300 rounded-md p-2">
+                  <option value="">Select</option>
+                  <option value="Friendly">Friendly</option>
+                  <option value="Professional">Professional</option>
+                  <option value="Informal">Informal</option>
+                  <option value="Empathetic">Empathetic</option>
+                  <option value="Supportive">Supportive</option>
+                  <option value="Formal">Formal</option>
+                  <option value="Casual">Casual</option>
+                  <option value="Authoritative">Authoritative</option>
+                  <option value="Cheerful">Cheerful</option>
+                  <option value="Persuasive">Persuasive</option>
+                </select>
+                <span id="characteristics-error" class="text-red-500 text-xs hidden">Please select a characteristic</span>
+              </div>
+              <div class="relative">
+                <label class="block text-sm sm:text-base font-medium mb-1">Voice</label>
+                <select id="voice" class="w-full border border-gray-300 rounded-md p-2">
+                  <option value="">Select your AI Voice</option>
+                  <option value="India">India</option>
+                  <option value="Russian">Russian</option>
+                  <option value="USA">USA</option>
+                  <option value="UK">UK</option>
+                  <option value="Germany">Germany</option>
+                </select>
+                <span id="voice-error" class="text-red-500 text-xs hidden">Please select a voice</span>
+              </div>
+              <div class="relative">
+                <label class="block text-sm sm:text-base font-medium mb-1">Timezone</label>
+                <select id="timezone" class="w-full border border-gray-300 rounded-md p-2">
+                  <option value="">Select your timezone</option>
+                  <option value="GMT">GMT</option>
+                  <option value="EST">EST</option>
+                  <option value="PST">PST</option>
+                  <option value="CST">CST</option>
+                </select>
+                <span id="timezone-error" class="text-red-500 text-xs hidden">Please select a timezone</span>
+              </div>
+            </div>
+
+            <!-- Profile Image Upload Section -->
+            <div>
+              <label class="block text-gray-700 font-semibold mb-2 text-sm sm:text-base">Profile image</label>
+              <div class="flex items-center bg-gray-100 border border-gray-300 rounded-md p-4 lg:w-[40%]">
+                <div class="bg-gray-300 flex items-center justify-center rounded-md mr-4" id="image-preview">
+                  <img src="/images/image-placeholder.jpeg" alt="Profile Image Placeholder" class="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-md" />
+                </div>
+                <label class="bg-black text-white py-2 px-4 rounded cursor-pointer text-sm sm:text-base flex-shrink-0">
+                  Add Image
+                  <input type="file" class="hidden" id="image-input" accept="image/*">
+                </label>
+              </div>
+              <span id="image-error" class="text-red-500 text-xs hidden">Please upload a valid image (JPG, JPEG, PNG) and ensure it is under 5MB.</span>
+            </div>
+          
+            <div class="mt-4 text-right">
+              <button type="submit" class="bg-black text-white px-4 sm:px-6 py-2 rounded hover:bg-gray-800 text-sm sm:text-base">Create</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+  <footer class="w-full p-4 md:p-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-gray-600 text-sm md:space-x-6 bg-white shadow-md ">
+    <a href="/index.html" class="hover:underline mr-4 md:ml-6 font-semibold my-2 md:hidden">BerryDial</a>
+    <div class="flex space-x-4 md:space-x-6">
+      <a href="index.html" class="hover:underline mr-4 md:ml-6 font-semibold hidden md:block">BerryDial</a>
+      <a href="#" class="hover:underline">Term of use</a>
+      <a href="#" class="hover:underline">Privacy policy</a>
+      <a href="#" class="hover:underline">Cookies</a>
+    </div>
+    <div class="mt-2 md:mt-0 md:ml-auto">
+      &copy; 2025 BerryDial | All rights reserved
+    </div>
+  </footer>
+
+    <!-- Script -->
+    <script>
+      document.getElementById('image-input').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const imagePreview = document.getElementById('image-preview');
+        const imageError = document.getElementById('image-error');
+
+        imageError.classList.add('hidden'); // Hide error initially
+
+        // Validate file type
+        const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+        if (file && !validTypes.includes(file.type)) {
+          imageError.textContent = 'Please upload a valid image (JPG, JPEG, PNG).';
+          imageError.classList.remove('hidden');
+          imagePreview.innerHTML = '<img src="/images/image-placeholder.jpeg" alt="Profile Image Placeholder" class="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-md" />';
+          return;
+        }
+
+        // Validate file size (5MB limit)
+        const maxSize = 5 * 1024 * 1024; // 5MB
+        if (file.size > maxSize) {
+          imageError.textContent = 'File size should be less than 5MB.';
+          imageError.classList.remove('hidden');
+          imagePreview.innerHTML = '<img src="/images/image-placeholder.jpeg" alt="Profile Image Placeholder" class="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-md" />';
+          return;
+        }
+
+        // If valid, show preview
+        const reader = new FileReader();
+        reader.onload = function() {
+          imagePreview.innerHTML = `<img src="${reader.result}" alt="Profile Image" class="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-md" />`;
+        };
+        reader.readAsDataURL(file);
+      });
+
+      function validateForm() {
+        let isValid = true;
+
+        // Clear previous error messages
+        document.querySelectorAll('.text-red-500').forEach(el => el.classList.add('hidden'));
+
+        // Check Agent Name
+        const agentName = document.getElementById('agent-name').value.trim();
+        if (agentName === '') {
+          document.getElementById('name-error').classList.remove('hidden');
+          isValid = false;
+        }
+
+        // Check Language
+        const language = document.getElementById('language').value;
+        if (language === '') {
+          document.getElementById('language-error').classList.remove('hidden');
+          isValid = false;
+        }
+
+        // Check Description
+        const description = document.getElementById('description').value.trim();
+        if (description === '') {
+          document.getElementById('description-error').classList.remove('hidden');
+          isValid = false;
+        }
+
+        // Check Characteristics
+        const characteristics = document.getElementById('characteristics').value;
+        if (characteristics === '') {
+          document.getElementById('characteristics-error').classList.remove('hidden');
+          isValid = false;
+        }
+
+        // Check Voice
+        const voice = document.getElementById('voice').value;
+        if (voice === '') {
+          document.getElementById('voice-error').classList.remove('hidden');
+          isValid = false;
+        }
+
+        // Check Timezone
+        const timezone = document.getElementById('timezone').value;
+        if (timezone === '') {
+          document.getElementById('timezone-error').classList.remove('hidden');
+          isValid = false;
+        }
+
+        // Check Profile Image
+        const imageInput = document.getElementById('image-input').files[0];
+        if (!imageInput) {
+          document.getElementById('image-error').textContent = 'Please upload a profile image.';
+          document.getElementById('image-error').classList.remove('hidden');
+          isValid = false;
+        }
+
+        return isValid;
+      }
+
+      // Additional validation: Hide the error when the voice option is selected
+      document.getElementById('voice').addEventListener('change', function() {
+        const voiceError = document.getElementById('voice-error');
+        if (this.value !== '') {
+          voiceError.classList.add('hidden');
+        }
+      });
+    </script>
+</body>
+</html>

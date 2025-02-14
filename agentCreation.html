@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Berry Dial</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const hamburger = document.getElementById('hamburger');
+      
+      sidebar.classList.toggle('-translate-x-full'); // Slide out or in
+      overlay.classList.toggle('hidden'); // Show the overlay when sidebar is open
+      hamburger.classList.toggle('fa-bars');
+      hamburger.classList.toggle('fa-times');
+    }
+
+    function toggleDropdown() {
+      const dropdownMenu = document.getElementById("dropdownMenu");
+      const chevronIcon = document.getElementById("chevronIcon");
+      dropdownMenu.classList.toggle("hidden");
+      chevronIcon.classList.toggle("fa-chevron-down");
+      chevronIcon.classList.toggle("fa-chevron-up");
+    }
+
+    document.addEventListener('click', function (event) {
+      const dropdownMenu = document.getElementById('dropdownMenu');
+      const userIcon = document.getElementById('userIcon');
+      
+      if (!userIcon.contains(event.target)) {
+        dropdownMenu.classList.add('hidden');
+        const chevronIcon = document.getElementById("chevronIcon");
+        chevronIcon.classList.remove("fa-chevron-up");
+        chevronIcon.classList.add("fa-chevron-down");
+      }
+    });
+  </script>
+</head>
+<body class="flex flex-col min-h-screen">
+  <!-- Overlay for mobile -->
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" onclick="toggleSidebar()"></div>
+
+  <!-- Header -->
+  <header class="w-full bg-white p-4 md:p-6 flex justify-between items-center border-b border-gray-200 z-50 fixed top-0 left-0 right-0">
+    <div class="flex items-center">
+      <button class="md:hidden" onclick="toggleSidebar()">
+        <i id="hamburger" class="fas fa-bars h-6 w-6 text-gray-600 mt-2"></i>
+      </button>
+      
+      <!-- Make "BerryDial" a clickable link -->
+      <a href="/index.html" class="text-xl font-semibold cursor-pointer md:w-48">
+        BerryDial
+      </a>
+      
+      <div class="hidden md:flex items-center space-x-4 text-gray-600 px-4">
+        <span class="text-gray-500 cursor-pointer">Dashboard</span>
+        <span class="text-gray-400">/</span>
+        <span class="font-medium cursor-pointer">Default</span>
+      </div>
+    </div>
+
+    <!-- Right side (bell icon and user dropdown) -->
+    <div class="flex items-center space-x-4">
+      <!-- Bell Icon with notification badge -->
+      <div class="relative mt-1 cursor-pointer">
+        <i class="fas fa-bell text-xl text-gray-600 sm:text-2xl"></i>
+        <span class="absolute -top-1 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex justify-center items-center">1</span>
+      </div>
+
+      <!-- User Icon with dropdown menu -->
+      <div class="relative flex items-center space-x-2 cursor-pointer" id="userIcon" onclick="toggleDropdown()">
+        <i class="fas fa-user text-xl text-gray-600 sm:text-2xl"></i>
+        <span class="hidden sm:inline text-gray-600 text-sm sm:text-base">My Account</span>
+        <i class="fas fa-chevron-down text-gray-600 sm:text-xl" id="chevronIcon"></i>
+        
+        <!-- Dropdown menu -->
+        <div id="dropdownMenu" class="hidden absolute right-0 mt-48 w-32 bg-white shadow-lg rounded-md text-gray-600">
+            <ul>
+                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Profile</li>
+                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Settings</li>
+                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm sm:text-base">Log Out</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <div class="flex flex-1 flex-col md:flex-row mt-16"> <!-- Added margin-top for header space -->
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 bg-gray-50 border-r border-gray-200 p-4 md:p-2 flex flex-col space-y-4 fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 md:relative transition duration-200 ease-in-out z-40">
+        <div class="mt-16 md:mt-6 flex flex-col gap-2">
+          <a href="dashboard.html" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-tachometer-alt"></i> Dashboards</a>
+          <a href="agentCreation.html" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-cogs"></i> Agent Customization</a>
+          <a href="#" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-phone"></i> Call Logs</a>
+          <a href="#" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-user"></i> Account Settings</a>
+        </div>
+        <div class="fixed bottom-0 flex flex-col gap-2">
+          <a href="#" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-question-circle"></i> Updates & FAQ</a>
+          <a href="#" class="text-gray-700 text-sm sm:text-base cursor-pointer hover:bg-gray-200 p-2 rounded-lg"><i class="fas fa-sign-out-alt"></i> Log out</a>
+        </div>
+      </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 bg-gray-100 p-6 flex flex-col justify-center items-center overflow-x-auto">
+      <!-- Content goes here -->
+      <div class="mx-auto bg-white shadow-lg rounded-lg p-6 max-w-full md:max-w-7xl w-full">
+        <!-- Dashboard Header -->
+        <div class="flex flex-col justify-between gap-4 mb-4 w-full md:w-auto">
+          <!-- Create New Agent Button -->
+          <div>
+            <button class="bg-black text-white px-6 py-2 rounded-md text-sm w-full md:w-auto">+ Create New Agent</button>
+          </div>
+          <!-- Search Input -->
+          <div class="relative w-full mt-2 md:mt-0">
+            <i class="fas fa-sliders-h absolute right-3 top-1/2 transform -translate-y-1/2 text-black"></i>
+            <input type="text" placeholder="Search Agents..." class="w-full pl-2.5 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none">
+          </div>
+        </div>
+
+        <!-- Table with Agents -->
+        <div class="overflow-x-auto">
+          <table class="w-full border border-gray-200 text-sm">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="p-3 text-left"><input type="checkbox"></th>
+                <th class="p-3 text-center">Agent Name</th>
+                <th class="p-3 text-center">Description</th>
+                <th class="p-3 text-center">Status</th>
+                <th class="p-3 text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <script>
+                const agents = [
+                  { name: "AI Assistant", description: "AI Assistant Description 1", status: true },
+                  { name: "AI Assistant", description: "AI Assistant Description 2", status: false },
+                  { name: "AI Assistant", description: "AI Assistant Description 3", status: true },
+                  { name: "AI Assistant", description: "AI Assistant Description 4", status: false },
+                ];
+                document.write(agents.map(agent => ` 
+                  <tr class="border-t">
+                    <td class="p-3"><input type="checkbox"></td>
+                    <td class="p-3 text-center">${agent.name}</td>
+                    <td class="p-3 text-center">${agent.description}</td>
+                    <td class="p-3 text-center">
+                      <button class="toggle-btn w-12 h-6 rounded-full transition-all duration-300 ${agent.status ? 'bg-black' : 'bg-gray-300'}">
+                        <span class="block w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${agent.status ? 'translate-x-8' : ''}"></span>
+                      </button>
+                    </td>
+                    <td class="p-3 flex justify-center items-center">
+                      <button class="text-black flex items-center">
+                        Edit <i class="fas fa-pencil-alt ml-2"></i>
+                      </button>
+                    </td>
+                  </tr>
+                `).join(''));
+              </script>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="w-full p-4 md:p-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-gray-600 text-sm md:space-x-6 bg-white shadow-md ">
+    <a href="index.html" class="hover:underline mr-4 md:ml-6 font-semibold my-2 md:hidden">BerryDial</a>
+    <div class="flex space-x-4 md:space-x-6">
+      <a href="index.html" class="hover:underline mr-4 md:ml-6 font-semibold hidden md:block">BerryDial</a>
+      <a href="#" class="hover:underline">Term of use</a>
+      <a href="#" class="hover:underline">Privacy policy</a>
+      <a href="#" class="hover:underline">Cookies</a>
+    </div>
+    <div class="mt-2 md:mt-0 md:ml-auto">
+      &copy; 2025 BerryDial | All rights reserved
+    </div>
+  </footer>
+</body>
+</html>
